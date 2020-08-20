@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.bankproject.MainActivity;
 import com.example.bankproject.Model.User;
+import com.example.bankproject.Model.UserRequest;
 import com.example.bankproject.Services.RetrofitConfig;
 
 import java.util.List;
@@ -19,8 +20,9 @@ public class UserRepository {
     TextView textView;
     User user;
 
-    public void getAllUsers() {
-        Call<List<User>> call = new RetrofitConfig().getUserService().getAllUsers("cpf");
+    public void getAllUsers(String cpf) {
+
+        Call<List<User>> call = new RetrofitConfig().getUserService().getAllUsers(cpf);
 
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -37,8 +39,9 @@ public class UserRepository {
         });
     }
 
-    public void findByUser() {
-        Call<User> call = new RetrofitConfig().getUserService().findByUser("cpf", "pws");
+    public void findByUser(String cpf, String pws) {
+
+        Call<User> call = new RetrofitConfig().getUserService().findByUser(cpf, pws);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -55,16 +58,15 @@ public class UserRepository {
         });
     }
 
-    public User addUser() {
-        user = new User();
+    public User addUser(UserRequest userRequest) {
 
-        Call<User> call = new RetrofitConfig().getUserService().addUser(user);
+        Call<User> call = new RetrofitConfig().getUserService().addUser(userRequest);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    user = response.body();
+                    User novoUser = response.body();
                 }
             }
 
@@ -76,8 +78,7 @@ public class UserRepository {
         return user;
     }
 
-    public void updateUser() {
-        user = new User();
+    public void updateUser(User user) {
 
         Call<User> call = new RetrofitConfig().getUserService().updateUser(user);
 
@@ -85,7 +86,7 @@ public class UserRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    user = response.body();
+                    User user = response.body();
                 }
             }
 

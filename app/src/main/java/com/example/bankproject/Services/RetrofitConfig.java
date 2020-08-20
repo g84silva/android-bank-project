@@ -1,8 +1,5 @@
 package com.example.bankproject.Services;
 
-import com.example.bankproject.Model.BankAccount;
-import com.example.bankproject.Model.BankTransation;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 

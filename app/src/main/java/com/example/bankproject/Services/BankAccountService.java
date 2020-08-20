@@ -1,6 +1,7 @@
 package com.example.bankproject.Services;
 
 import com.example.bankproject.Model.BankAccount;
+import com.example.bankproject.Model.BankAccountRequest;
 
 import java.util.List;
 
@@ -15,12 +16,15 @@ import retrofit2.http.Path;
 
 public interface BankAccountService {
 
-    @Headers("Content-Type : application/json")
+
     @POST("accounts")
-    Call<BankAccount> addAccount(@Body BankAccount bankAccount);
+    Call<BankAccount> addAccount(@Header("cpf") String cpf,
+                                 @Header("pws") String pws,
+                                 @Body BankAccountRequest bankAccountRequest);
 
     @GET("accounts")
-    Call<List<BankAccount>> getAccountsByUser(@Header("cpf") String cpf);
+    Call<List<BankAccount>> getAccountsByUser(@Header("cpf") String cpf,
+                                              @Header("pws") String pws);
 
     @GET("getAllAccounts")
     Call<List<BankAccount>> getAllAccounts(@Header("cpf") String cpf);

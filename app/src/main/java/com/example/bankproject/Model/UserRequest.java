@@ -2,42 +2,23 @@ package com.example.bankproject.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({"createdAt" , "updatedAt" , "__v"})
-public class User {
+public class UserRequest {
 
-    private String _id;
-    private String name;
     private String cpf;
-    private String pws;
+    private String name;
     private String avatar;
     private String telefone;
+    private String pws;
 
-    public User() {
+    public UserRequest() {
     }
 
-    public User(String _id, String name, String cpf, String pws, String avatar, String telefone) {
-        this._id = _id;
-        this.name = name;
+    public UserRequest(String cpf, String name, String avatar, String telefone, String pws) {
         this.cpf = cpf;
-        this.pws = pws;
+        this.name = name;
         this.avatar = avatar;
         this.telefone = telefone;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.pws = pws;
     }
 
     public String getCpf() {
@@ -48,12 +29,12 @@ public class User {
         this.cpf = cpf;
     }
 
-    public String getPws() {
-        return pws;
+    public String getName() {
+        return name;
     }
 
-    public void setPws(String pws) {
-        this.pws = pws;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAvatar() {
@@ -72,5 +53,11 @@ public class User {
         this.telefone = telefone;
     }
 
+    public String getPws() {
+        return pws;
+    }
 
+    public void setPws(String pws) {
+        this.pws = pws;
+    }
 }

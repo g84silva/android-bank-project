@@ -1,5 +1,8 @@
 package com.example.bankproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"createdAt" , "updatedAt" , "__v"})
 public class BankAccount {
 
     private String _id;
@@ -8,6 +11,9 @@ public class BankAccount {
     private int account_balance;
     private int status;
     private User user;
+
+    public BankAccount() {
+    }
 
     public String get_id() {
         return _id;

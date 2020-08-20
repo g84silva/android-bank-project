@@ -1,6 +1,6 @@
 package com.example.bankproject.Model;
 
-public class BankTransation {
+public class BankTransaction {
 
     private String _id;
     private int source_transaction;

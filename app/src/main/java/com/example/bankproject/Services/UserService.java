@@ -1,6 +1,7 @@
 package com.example.bankproject.Services;
 
 import com.example.bankproject.Model.User;
+import com.example.bankproject.Model.UserRequest;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface UserService {
                           @Header("pws") String pws);
 
     @POST("users")
-    Call<User> addUser(@Body User user);
+    Call<User> addUser(@Body UserRequest userRequest);
 
     @PUT("user/update")
     Call<User> updateUser(@Body User user);
