@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.bankproject.Model.BankAccount;
 import com.example.bankproject.Model.BankAccountRequest;
+import com.example.bankproject.Model.BankAccountResponse;
 import com.example.bankproject.Model.User;
 import com.example.bankproject.Model.UserRequest;
 import com.example.bankproject.Services.RetrofitConfig;
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
 //        addUser(userRequest);
 //        updateUser();
 //        addAccount();
-        getAccountsByUser();
+//        getAccountsByUser();
+//        getAllAccounts();
+        updateAccounts();
     }
 
     public void sendRequest() {
@@ -150,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String content ="";
                     content += "_id: " + bankAccountResponse.get_id() + "\n";
-                    content += "Bank_brench: " + bankAccountResponse.getBank_brench() + "\n";
+                    content += "Bank_branch: " + bankAccountResponse.getBank_branch() + "\n";
                     content += "code: " + bankAccountResponse.getCode() + "\n";
                     content += "balance: " + bankAccountResponse.getAccount_balance() + "\n";
                     content += "status: " + bankAccountResponse.getStatus() + "\n";
@@ -168,34 +171,84 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getAccountsByUser() {
 
-        Call<List<BankAccount>> call = new RetrofitConfig().getBankAccountService().getAccountsByUser("00100100101", "880808");
+        Call<BankAccount> call = new RetrofitConfig().getBankAccountService().getAccountsByUser("00100100101", "880808");
 
-        call.enqueue(new Callback<List<BankAccount>>() {
+        call.enqueue(new Callback<BankAccount>() {
             @Override
-            public void onResponse(Call<List<BankAccount>> call, Response<List<BankAccount>> response) {
+            public void onResponse(Call<BankAccount> call, Response<BankAccount> response) {
                 if (response.isSuccessful()) {
 
-                  List<BankAccount> bankAccounts = response.body();
-
-                   for(BankAccount bankAccount : bankAccounts) {
+                  BankAccount bankAccount = response.body();
 
                        String content = "";
                        content += "_id: " + bankAccount.get_id() + "\n";
-                       content += "Bank_brench: " + bankAccount.getBank_brench() + "\n";
+                       content += "Bank_branch: " + bankAccount.getBank_branch() + "\n";
                        content += "code: " + bankAccount.getCode() + "\n";
                        content += "balance: " + bankAccount.getAccount_balance() + "\n";
                        content += "status: " + bankAccount.getStatus() + "\n";
                        content += "cpf: " + bankAccount.getCpf() + "\n\n";
 
                        textView.append(content);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BankAccount> call, Throwable t) {
+                textView.setText(t.getMessage());
+            }
+        });
+    }
+
+    public void getAllAccounts() {
+
+        Call<List<BankAccountResponse>> call = new RetrofitConfig().getBankAccountService().getAllAccounts("adminUser", "123456");
+
+        call.enqueue(new Callback<List<BankAccountResponse>>() {
+            @Override
+            public void onResponse(Call<List<BankAccountResponse>> call, Response<List<BankAccountResponse>> response) {
+                if (response.isSuccessful()) {
+
+                    List<BankAccountResponse> bankAccountResponses = response.body();
+                    for (BankAccountResponse bankAccountResponse : bankAccountResponses) {
+                        String content = "";
+                        content += "_id: " + bankAccountResponse.get_id() + "\n";
+                        content += "Bank_branch: " + bankAccountResponse.getBank_branch() + "\n";
+                        content += "code: " + bankAccountResponse.getCode() + "\n";
+                        content += "balance: " + bankAccountResponse.getAccount_balance() + "\n";
+                        content += "status: " + bankAccountResponse.getStatus() + "\n";
+                        content += "user: " + bankAccountResponse.getUser() + "\n\n";
+
+                        textView.append(content);
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<BankAccount>> call, Throwable t) {
+            public void onFailure(Call<List<BankAccountResponse>> call, Throwable t) {
                 textView.setText(t.getMessage());
             }
         });
+
+    }
+
+    public void updateAccounts() {
+
+        Call call = new RetrofitConfig().getBankAccountService().updateAccounts("47963", "00100100101", "880808");
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.isSuccessful()) {
+                    call = (Call) response.body();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                textView.setText(t.getMessage());
+            }
+        });
+
     }
 }

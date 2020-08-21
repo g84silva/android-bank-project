@@ -3,24 +3,17 @@ package com.example.bankproject.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"createdAt" , "updatedAt" , "__v"})
-public class BankAccount {
+public class BankAccountResponse {
 
     private String _id;
     private String bank_branch;
     private String code;
     private int account_balance;
     private int status;
-    private String cpf;
+    private String user;
 
-    public BankAccount() {
-    }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public BankAccountResponse() {
     }
 
     public String get_id() {
@@ -61,6 +54,14 @@ public class BankAccount {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
 }

@@ -6,6 +6,9 @@ public class BankAccountRequest {
     private int account_balance;
     private int status;
 
+    public BankAccountRequest() {
+    }
+
     public BankAccountRequest(String cpf, int account_balance, int status) {
         this.cpf = cpf;
         this.account_balance = account_balance;

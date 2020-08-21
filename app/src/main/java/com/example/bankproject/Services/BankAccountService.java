@@ -2,6 +2,7 @@ package com.example.bankproject.Services;
 
 import com.example.bankproject.Model.BankAccount;
 import com.example.bankproject.Model.BankAccountRequest;
+import com.example.bankproject.Model.BankAccountResponse;
 
 import java.util.List;
 
@@ -9,10 +10,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 
 public interface BankAccountService {
 
@@ -23,12 +22,15 @@ public interface BankAccountService {
                                  @Body BankAccountRequest bankAccountRequest);
 
     @GET("accounts")
-    Call<List<BankAccount>> getAccountsByUser(@Header("cpf") String cpf,
-                                              @Header("pws") String pws);
+    Call<BankAccount> getAccountsByUser(@Header("cpf") String cpf,
+                                        @Header("pws") String pws);
 
     @GET("getAllAccounts")
-    Call<List<BankAccount>> getAllAccounts(@Header("cpf") String cpf);
+    Call<List<BankAccountResponse>> getAllAccounts(@Header("cpf") String cpf,
+                                                   @Header("pws") String pws);
 
-    @PUT("transaction/{code}")
-    Call<BankAccount> UpdateAccounts(@Path("code") String code, @Body BankAccount bankAccount);
+    @PUT("accounts/cancel")
+    Call updateAccounts(@Header("code") String code,
+                        @Header("cpf") String cpf,
+                        @Header("pws") String pws);
 }
