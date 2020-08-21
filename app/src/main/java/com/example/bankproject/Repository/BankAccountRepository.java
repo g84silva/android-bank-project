@@ -38,19 +38,19 @@ public class BankAccountRepository {
     }
     public void getAccountsByUser(String cpf, String pws) {
 
-        Call<BankAccount> call = new RetrofitConfig().getBankAccountService().getAccountsByUser(cpf, pws);
+        Call<BankAccountResponse> call = new RetrofitConfig().getBankAccountService().getAccountsByUser(cpf, pws);
 
-        call.enqueue(new Callback<BankAccount>() {
+        call.enqueue(new Callback<BankAccountResponse>() {
             @Override
-            public void onResponse(Call<BankAccount> call, Response<BankAccount> response) {
+            public void onResponse(Call<BankAccountResponse> call, Response<BankAccountResponse> response) {
                 if (response.isSuccessful()) {
-                    BankAccount bankAccount = response.body();
+                    BankAccountResponse bankAccount = response.body();
 
                 }
             }
 
             @Override
-            public void onFailure(Call<BankAccount> call, Throwable t) {
+            public void onFailure(Call<BankAccountResponse> call, Throwable t) {
                 textView.setText(t.getMessage());
             }
         });

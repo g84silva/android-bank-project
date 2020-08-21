@@ -22,7 +22,7 @@ public interface BankAccountService {
                                  @Body BankAccountRequest bankAccountRequest);
 
     @GET("accounts")
-    Call<BankAccount> getAccountsByUser(@Header("cpf") String cpf,
+    Call<BankAccountResponse> getAccountsByUser(@Header("cpf") String cpf,
                                         @Header("pws") String pws);
 
     @GET("getAllAccounts")
