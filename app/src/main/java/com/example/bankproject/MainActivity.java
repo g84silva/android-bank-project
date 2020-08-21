@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
 //        addUser(userRequest);
 //        updateUser();
 //        addAccount();
-//        getAccountsByUser();
+        getAccountsByUser();
 //        getAllAccounts();
-        updateAccounts();
+//        updateAccounts();
     }
 
     public void sendRequest() {
@@ -234,18 +234,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateAccounts() {
 
-        Call call = new RetrofitConfig().getBankAccountService().updateAccounts("47963", "00100100101", "880808");
+        Call<BankAccount> call = new RetrofitConfig().getBankAccountService().updateAccounts("00100100101", "880808", 3);
 
-        call.enqueue(new Callback() {
+        call.enqueue(new Callback<BankAccount>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<BankAccount> call, Response<BankAccount> response) {
                 if (response.isSuccessful()) {
-                    call = (Call) response.body();
+
+                    BankAccount bankAccount = response.body();
+
+                    String content = "";
+
+                    content += "status: " + bankAccount.getStatus() + "\n";
+
+                    textView.append(content);
+
                 }
+
+                Toast.makeText(MainActivity.this, "Conta atualizada com sucesso!", Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<BankAccount> call, Throwable t) {
                 textView.setText(t.getMessage());
             }
         });

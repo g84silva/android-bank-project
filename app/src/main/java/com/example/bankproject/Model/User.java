@@ -1,10 +1,18 @@
 package com.example.bankproject.Model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({"createdAt" , "updatedAt" , "__v"})
-public class User {
+import java.io.Serializable;
 
+@Entity(tableName = "Usuario")
+@JsonIgnoreProperties({"createdAt" , "updatedAt" , "__v"})
+public class User implements Serializable {
+    @PrimaryKey(autoGenerate = true) private int uid;
+    @ColumnInfo(name = "server_id")
     private String _id;
     private String name;
     private String cpf;
@@ -22,6 +30,14 @@ public class User {
         this.pws = pws;
         this.avatar = avatar;
         this.telefone = telefone;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String get_id() {
@@ -72,5 +88,15 @@ public class User {
         this.telefone = telefone;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "_id='" + _id + '\'' +
+                ", name='" + name + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", pws='" + pws + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
+    }
 }

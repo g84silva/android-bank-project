@@ -77,24 +77,24 @@ public class BankAccountRepository {
 
     }
 
-    public void updateAccounts(String code, String cpf, String pws) {
-
-        Call call = new RetrofitConfig().getBankAccountService().updateAccounts(code, cpf, pws);
-
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                if (response.isSuccessful()) {
-                    textView.setText("Code " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                textView.setText(t.getMessage());
-            }
-        });
-
-    }
+//    public void updateAccounts(String code, String cpf, int status) {
+//
+//        Call call = new RetrofitConfig().getBankAccountService().updateAccounts(code, cpf, status);
+//
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onResponse(Call call, Response response) {
+//                if (response.isSuccessful()) {
+//                    textView.setText("Code " + response.code());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Throwable t) {
+//                textView.setText(t.getMessage());
+//            }
+//        });
+//
+//    }
 
 }

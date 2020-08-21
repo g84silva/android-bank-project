@@ -12,9 +12,6 @@ public class BankAccount {
     private int status;
     private String cpf;
 
-    public BankAccount() {
-    }
-
     public String getCpf() {
         return cpf;
     }

@@ -29,8 +29,8 @@ public interface BankAccountService {
     Call<List<BankAccountResponse>> getAllAccounts(@Header("cpf") String cpf,
                                                    @Header("pws") String pws);
 
-    @PUT("accounts/cancel")
-    Call updateAccounts(@Header("code") String code,
-                        @Header("cpf") String cpf,
-                        @Header("pws") String pws);
+    @PUT("accounts")
+    Call<BankAccount> updateAccounts(@Header("cpf") String cpf,
+                                     @Header("pws") String pws,
+                                     @Body int status);
 }
