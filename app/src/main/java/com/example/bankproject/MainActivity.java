@@ -171,14 +171,14 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getAccountsByUser() {
 
-        Call<BankAccount> call = new RetrofitConfig().getBankAccountService().getAccountsByUser("00100100101", "880808");
+        Call<BankAccountResponse> call = new RetrofitConfig().getBankAccountService().getAccountsByUser("00100100101", "880808");
 
-        call.enqueue(new Callback<BankAccount>() {
+        call.enqueue(new Callback<BankAccountResponse>() {
             @Override
-            public void onResponse(Call<BankAccount> call, Response<BankAccount> response) {
+            public void onResponse(Call<BankAccountResponse> call, Response<BankAccountResponse> response) {
                 if (response.isSuccessful()) {
 
-                  BankAccount bankAccount = response.body();
+                    BankAccountResponse bankAccount = response.body();
 
                        String content = "";
                        content += "_id: " + bankAccount.get_id() + "\n";
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                        content += "code: " + bankAccount.getCode() + "\n";
                        content += "balance: " + bankAccount.getAccount_balance() + "\n";
                        content += "status: " + bankAccount.getStatus() + "\n";
-                       content += "cpf: " + bankAccount.getCpf() + "\n\n";
+                       content += "user: " + bankAccount.getUser() + "\n\n";
 
                        textView.append(content);
 
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<BankAccount> call, Throwable t) {
+            public void onFailure(Call<BankAccountResponse> call, Throwable t) {
                 textView.setText(t.getMessage());
             }
         });
