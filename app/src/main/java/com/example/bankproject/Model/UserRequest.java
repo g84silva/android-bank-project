@@ -21,6 +21,13 @@ public class UserRequest {
         this.pws = pws;
     }
 
+    public UserRequest(String cpf, String name, String telefone, String pws) {
+        this.cpf = cpf;
+        this.name = name;
+        this.telefone = telefone;
+        this.pws = pws;
+    }
+
     public String getCpf() {
         return cpf;
     }

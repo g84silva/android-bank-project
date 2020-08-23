@@ -1,8 +1,10 @@
 package com.example.bankproject.Repository;
 
+import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bankproject.DAO.AppDatabase;
 import com.example.bankproject.MainActivity;
 import com.example.bankproject.Model.User;
 import com.example.bankproject.Model.UserRequest;
@@ -15,6 +17,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository {
+
+    private AppDatabase database;
+
+    public UserRepository(Context context) {
+        this(AppDatabase.getInstance(context));
+    }
+
+    private UserRepository(AppDatabase instance) {
+        this.database = instance;
+    }
+
+    private void insert(List<User> users) {
+        database.userDao().insertAllDAO(users);
+    }
 
     private List<User> users;
     TextView textView;
@@ -29,6 +45,7 @@ public class UserRepository {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     users = response.body();
+                    UserRepository.this.insert(users);
                 }
             }
 
@@ -60,13 +77,14 @@ public class UserRepository {
 
     public User addUser(UserRequest userRequest) {
 
-        Call<User> call = new RetrofitConfig().getUserService().addUser(userRequest);
+        Call<User> call = new RetrofitConfig().getUserService().addUser(new UserRequest());
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    User novoUser = response.body();
+                    user = response.body();
+
                 }
             }
 
@@ -95,5 +113,28 @@ public class UserRepository {
                 textView.setText(t.getMessage());
             }
         });
+    }
+
+    public User getUserProfile(final UserRequest userRequest) {
+
+        Call<User> call = new RetrofitConfig().getUserService().addUser(userRequest);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                   user = response.body();
+                   database.userDao().insertUSerDAO(user);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+
+        return user;
     }
 }

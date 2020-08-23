@@ -3,6 +3,9 @@ package com.example.bankproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +14,7 @@ import com.example.bankproject.Model.BankAccountRequest;
 import com.example.bankproject.Model.BankAccountResponse;
 import com.example.bankproject.Model.User;
 import com.example.bankproject.Model.UserRequest;
+import com.example.bankproject.Repository.UserRepository;
 import com.example.bankproject.Services.RetrofitConfig;
 
 import java.util.ArrayList;
@@ -21,30 +25,62 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private UserRepository uRepo = null;
     private List<User> users;
-    private List<BankAccount> bankAccounts;
-    BankAccount bankAccount;
-    BankAccountRequest bankAccountRequest;
-    User user;
     UserRequest userRequest;
-    TextView textView;
+    User user;
+    private EditText mNome, mCpf, mTelefone, mPws;
+    private TextView mResult;
+    private Button mBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.all_users);
+        mNome  =findViewById(R.id.edt_login_name);
+        mCpf  =findViewById(R.id.edt_login_cpf);
+        mTelefone  =findViewById(R.id.edt_login_telefone);
+        mPws  =findViewById(R.id.edt_login_pws);
+        mResult = findViewById(R.id.all_users);
+        mBtn = findViewById(R.id.btn_request);
+
+        uRepo = new UserRepository(this);
 
         users = new ArrayList<>();
 
+        mBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                userRequest = new UserRequest(mNome.getText().toString(),
+//                                        mCpf.getText().toString(),
+//                                        mPws.getText().toString(),
+//                                        mTelefone.getText().toString());
+//                login(userRequest);
+//                uRepo.getAllUsers();
+            }
+        });
 //        sendRequest();
 //        addUser(userRequest);
 //        updateUser();
 //        addAccount();
-        getAccountsByUser();
+//        getAccountsByUser();
 //        getAllAccounts();
 //        updateAccounts();
+
     }
+
+    public void login(UserRequest userRequest) {
+        if (uRepo != null) {
+           uRepo.getUserProfile(userRequest);
+            Toast.makeText(MainActivity.this, "Success: " + user.getName(), Toast.LENGTH_LONG).show();
+        }
+
+//        Toast.makeText(MainActivity.this, "Falha na request!", Toast.LENGTH_LONG).show();
+    }
+
+
 
     public void sendRequest() {
         Call<User> call = new RetrofitConfig().getUserService().findByUser("08215596975", "123456");
@@ -63,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     content += "telefone: " + user.getTelefone() + "\n";
                     content += "avatar: " + user.getAvatar() + "\n\n";
 
-                    textView.append(content);
+                mResult.append(content);
 //                }
                 Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_LONG).show();
 
@@ -96,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
                     content += "telefone: " + userResponse.getTelefone() + "\n";
                     content += "avatar: " + userResponse.getAvatar() + "\n\n";
 
-                    textView.append(content);
+                    mResult.append(content);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                textView.setText(t.getMessage());
+                mResult.setText(t.getMessage());
             }
         });
 
@@ -128,13 +164,13 @@ public class MainActivity extends AppCompatActivity {
                     content += "telefone: " + userResponse.getTelefone() + "\n";
                     content += "avatar: " + userResponse.getAvatar() + "\n\n";
 
-                    textView.append(content);
+                    mResult.append(content);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                textView.setText(t.getMessage());
+                mResult.setText(t.getMessage());
             }
         });
     }
@@ -159,13 +195,13 @@ public class MainActivity extends AppCompatActivity {
                     content += "status: " + bankAccountResponse.getStatus() + "\n";
 //                    content += "user: " + bankAccountResponse.getUser() + "\n\n";
 
-                    textView.append(content);
+                    mResult.append(content);
                 }
             }
 
             @Override
             public void onFailure(Call<BankAccount> call, Throwable t) {
-                textView.setText(t.getMessage());
+                mResult.setText(t.getMessage());
             }
         });
     }
@@ -188,14 +224,14 @@ public class MainActivity extends AppCompatActivity {
                        content += "status: " + bankAccount.getStatus() + "\n";
                        content += "user: " + bankAccount.getUser() + "\n\n";
 
-                       textView.append(content);
+                    mResult.append(content);
 
                 }
             }
 
             @Override
             public void onFailure(Call<BankAccountResponse> call, Throwable t) {
-                textView.setText(t.getMessage());
+                mResult.setText(t.getMessage());
             }
         });
     }
@@ -219,14 +255,14 @@ public class MainActivity extends AppCompatActivity {
                         content += "status: " + bankAccountResponse.getStatus() + "\n";
                         content += "user: " + bankAccountResponse.getUser() + "\n\n";
 
-                        textView.append(content);
+                        mResult.append(content);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<List<BankAccountResponse>> call, Throwable t) {
-                textView.setText(t.getMessage());
+                mResult.setText(t.getMessage());
             }
         });
 
@@ -234,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateAccounts() {
 
-        Call<BankAccount> call = new RetrofitConfig().getBankAccountService().updateAccounts("00100100101", "880808", 3);
+        Call<BankAccount> call = new RetrofitConfig().getBankAccountService().updateAccounts("00100100101", "880808", 0);
 
         call.enqueue(new Callback<BankAccount>() {
             @Override
@@ -247,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
                     content += "status: " + bankAccount.getStatus() + "\n";
 
-                    textView.append(content);
+                    mResult.append(content);
 
                 }
 
@@ -256,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BankAccount> call, Throwable t) {
-                textView.setText(t.getMessage());
+                mResult.setText(t.getMessage());
             }
         });
 
