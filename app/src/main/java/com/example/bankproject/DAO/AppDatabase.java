@@ -6,22 +6,25 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.bankproject.Model.User;
+import com.example.bankproject.model.User;
 
-@Database(entities = {User.class}, version = 1)
+@Database(
+    entities = {User.class},
+    version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract UserDao userDao();
+  public abstract UserDao userDao();
 
-    private static AppDatabase instance = null;
+  private static AppDatabase instance = null;
 
-    public static AppDatabase getInstance(Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(context, AppDatabase.class, "Project_bank")
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
-                    .build();
-        }
-        return instance;
+  public static AppDatabase getInstance(Context context) {
+    if (instance == null) {
+      instance =
+          Room.databaseBuilder(context, AppDatabase.class, "Project_bank")
+              .allowMainThreadQueries()
+              .fallbackToDestructiveMigration()
+              .build();
     }
+    return instance;
+  }
 }
