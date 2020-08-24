@@ -1,10 +1,13 @@
 package com.example.bankproject.Repository;
 
+import android.content.Context;
 import android.widget.TextView;
 
+import com.example.bankproject.DAO.AppDatabase;
 import com.example.bankproject.Model.BankAccount;
 import com.example.bankproject.Model.BankAccountRequest;
 import com.example.bankproject.Model.BankAccountResponse;
+import com.example.bankproject.Model.User;
 import com.example.bankproject.Services.RetrofitConfig;
 
 import java.util.List;
@@ -15,6 +18,22 @@ import retrofit2.Response;
 
 public class BankAccountRepository {
 
+    private AppDatabase database;
+
+    public BankAccountRepository(Context context) {
+        this(AppDatabase.getInstance(context));
+    }
+
+    private BankAccountRepository(AppDatabase instance) {
+        this.database = instance;
+    }
+
+    private void insert(List<BankAccount> bankAccounts) {
+        database.bankAccDAO().insertAllAccDAO(bankAccounts);
+    }
+
+    private List<BankAccount> bankAccounts;
+    BankAccount bankAccount;
     TextView textView;
 
     public void addAccount(String cpf, String pws, BankAccountRequest bankAccountRequest) {

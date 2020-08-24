@@ -8,9 +8,10 @@ public class BankAccountResponse {
     private String _id;
     private String bank_branch;
     private String code;
+    private String user;
     private int account_balance;
     private int status;
-    private String user;
+
 
 
     public BankAccountResponse() {

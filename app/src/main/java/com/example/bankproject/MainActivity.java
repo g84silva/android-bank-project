@@ -15,6 +15,7 @@ import com.example.bankproject.Model.BankAccountResponse;
 import com.example.bankproject.Model.User;
 import com.example.bankproject.Model.UserRequest;
 import com.example.bankproject.Repository.UserRepository;
+import com.example.bankproject.Services.RequestResult;
 import com.example.bankproject.Services.RetrofitConfig;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private UserRepository uRepo = null;
     private List<User> users;
-    UserRequest userRequest;
+    //    UserRequest userRequest;
     User user;
     private EditText mNome, mCpf, mTelefone, mPws;
     private TextView mResult;
@@ -39,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNome  =findViewById(R.id.edt_login_name);
-        mCpf  =findViewById(R.id.edt_login_cpf);
-        mTelefone  =findViewById(R.id.edt_login_telefone);
-        mPws  =findViewById(R.id.edt_login_pws);
+        mNome = findViewById(R.id.edt_login_name);
+        mCpf = findViewById(R.id.edt_login_cpf);
+        mTelefone = findViewById(R.id.edt_login_telefone);
+        mPws = findViewById(R.id.edt_login_pws);
         mResult = findViewById(R.id.all_users);
         mBtn = findViewById(R.id.btn_request);
 
@@ -53,13 +54,16 @@ public class MainActivity extends AppCompatActivity {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                userRequest = new UserRequest(mNome.getText().toString(),
-//                                        mCpf.getText().toString(),
-//                                        mPws.getText().toString(),
-//                                        mTelefone.getText().toString());
-//                login(userRequest);
-//                uRepo.getAllUsers();
+                UserRequest userRequest = new UserRequest(
+                        mCpf.getText().toString(),
+                        mNome.getText().toString(),
+                        mPws.getText().toString(),
+                        mTelefone.getText().toString());
+                login(userRequest);
+
             }
+
+            ;
         });
 //        sendRequest();
 //        addUser(userRequest);
@@ -72,14 +76,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(UserRequest userRequest) {
+        RequestResult result = new RequestResult() {
+
+            @Override
+            public <T> void successResult(T clazz) {
+
+                showUser((User) clazz);
+
+            }
+
+            @Override
+            public void errorResult(String message) {
+                Toast.makeText(MainActivity.this, "Falha na request!", Toast.LENGTH_LONG).show();
+            }
+        };
         if (uRepo != null) {
-           uRepo.getUserProfile(userRequest);
-            Toast.makeText(MainActivity.this, "Success: " + user.getName(), Toast.LENGTH_LONG).show();
+            uRepo.getUserProfile(userRequest, result);
+            Toast.makeText(MainActivity.this, "Seja bem vindo: " + userRequest.getName(), Toast.LENGTH_LONG).show();
+//            uRepo.getAllUsers("userAdmin", result);
         }
-
-//        Toast.makeText(MainActivity.this, "Falha na request!", Toast.LENGTH_LONG).show();
     }
-
 
 
     public void sendRequest() {
@@ -91,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
                 User user = response.body();
 
 //                for (User user : users) {
-                    String content ="";
-                    content += "_id: " + user.get_id() + "\n";
-                    content += "name: " + user.getName() + "\n";
-                    content += "cpf: " + user.getCpf() + "\n";
-                    content += "pws: " + user.getPws() + "\n";
-                    content += "telefone: " + user.getTelefone() + "\n";
-                    content += "avatar: " + user.getAvatar() + "\n\n";
+                String content = "";
+                content += "_id: " + user.get_id() + "\n";
+                content += "name: " + user.getName() + "\n";
+                content += "cpf: " + user.getCpf() + "\n";
+                content += "pws: " + user.getPws() + "\n";
+                content += "telefone: " + user.getTelefone() + "\n";
+                content += "avatar: " + user.getAvatar() + "\n\n";
 
                 mResult.append(content);
 //                }
@@ -113,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public User addUser(UserRequest userRequest) {
-        userRequest = new UserRequest("Testando request", "00100100101", "","990009000","880808");
+        userRequest = new UserRequest("Testando request", "00100100101", "", "990009000", "880808");
 
         Call<User> call = new RetrofitConfig().getUserService().addUser(userRequest);
 
@@ -124,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
                     User userResponse = response.body();
 
-                    String content ="";
+                    String content = "";
 //                    content += "_id: " + userResponse.get_id() + "\n";
                     content += "name: " + userResponse.getName() + "\n";
                     content += "cpf: " + userResponse.getCpf() + "\n";
@@ -146,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateUser() {
-        User user = new User("5f3e8e54d76ab10021d40eb7","Testando request", "00100100101", "880808", "", "990009000");
+        User user = new User("5f3e8e54d76ab10021d40eb7", "Testando request", "00100100101", "880808", "", "990009000");
 
         Call<User> call = new RetrofitConfig().getUserService().updateUser(user);
 
@@ -156,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     User userResponse = response.body();
 
-                    String content ="";
+                    String content = "";
                     content += "_id: " + userResponse.get_id() + "\n";
                     content += "name: " + userResponse.getName() + "\n";
                     content += "cpf: " + userResponse.getCpf() + "\n";
@@ -177,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addAccount() {
 
-        BankAccountRequest bankAccountRequest = new BankAccountRequest("00100100101", 89,1);
+        BankAccountRequest bankAccountRequest = new BankAccountRequest("00100100101", 89, 1);
 
         Call<BankAccount> call = new RetrofitConfig().getBankAccountService().addAccount("00100100101", "880808", bankAccountRequest);
 
@@ -187,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     BankAccount bankAccountResponse = response.body();
 
-                    String content ="";
+                    String content = "";
                     content += "_id: " + bankAccountResponse.get_id() + "\n";
                     content += "Bank_branch: " + bankAccountResponse.getBank_branch() + "\n";
                     content += "code: " + bankAccountResponse.getCode() + "\n";
@@ -205,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void getAccountsByUser() {
 
         Call<BankAccountResponse> call = new RetrofitConfig().getBankAccountService().getAccountsByUser("00100100101", "880808");
@@ -216,13 +233,13 @@ public class MainActivity extends AppCompatActivity {
 
                     BankAccountResponse bankAccount = response.body();
 
-                       String content = "";
-                       content += "_id: " + bankAccount.get_id() + "\n";
-                       content += "Bank_branch: " + bankAccount.getBank_branch() + "\n";
-                       content += "code: " + bankAccount.getCode() + "\n";
-                       content += "balance: " + bankAccount.getAccount_balance() + "\n";
-                       content += "status: " + bankAccount.getStatus() + "\n";
-                       content += "user: " + bankAccount.getUser() + "\n\n";
+                    String content = "";
+                    content += "_id: " + bankAccount.get_id() + "\n";
+                    content += "Bank_branch: " + bankAccount.getBank_branch() + "\n";
+                    content += "code: " + bankAccount.getCode() + "\n";
+                    content += "balance: " + bankAccount.getAccount_balance() + "\n";
+                    content += "status: " + bankAccount.getStatus() + "\n";
+                    content += "user: " + bankAccount.getUser() + "\n\n";
 
                     mResult.append(content);
 
@@ -297,4 +314,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+    private void updateList(List<User> users) {
+        for (User user : users) {
+            String content = "";
+            content += "_id: " + user.get_id() + "\n";
+            content += "name: " + user.getName() + "\n";
+            content += "cpf: " + user.getCpf() + "\n";
+            content += "pws: " + user.getPws() + "\n";
+            content += "telefone: " + user.getTelefone() + "\n";
+            content += "avatar: " + user.getAvatar() + "\n\n";
+
+            mResult.append(content);
+        }
+    }
+
+    private <T> void showUser(User clazz) {
+        User user = clazz;
+//
+        String content = "";
+        content += "_id: " + user.get_id() + "\n";
+        content += "name: " + user.getName() + "\n";
+        content += "cpf: " + user.getCpf() + "\n";
+        content += "pws: " + user.getPws() + "\n";
+        content += "telefone: " + user.getTelefone() + "\n";
+        content += "avatar: " + user.getAvatar() + "\n\n";
+
+        mResult.append(content);
+    }
+
 }

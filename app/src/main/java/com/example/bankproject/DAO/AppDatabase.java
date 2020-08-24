@@ -6,12 +6,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.bankproject.Model.BankAccount;
+import com.example.bankproject.Model.BankTransaction;
 import com.example.bankproject.Model.User;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class, BankAccount.class, BankTransaction.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract UserDao userDao();
+    public abstract UserDAO userDAO();
+    public abstract BankAccDAO bankAccDAO();
+    public abstract BTransDAO bTransDAO();
 
     private static AppDatabase instance = null;
 

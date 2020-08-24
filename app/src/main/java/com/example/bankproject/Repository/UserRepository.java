@@ -1,13 +1,13 @@
 package com.example.bankproject.Repository;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bankproject.DAO.AppDatabase;
-import com.example.bankproject.MainActivity;
 import com.example.bankproject.Model.User;
 import com.example.bankproject.Model.UserRequest;
+import com.example.bankproject.Services.RequestResult;
 import com.example.bankproject.Services.RetrofitConfig;
 
 import java.util.List;
@@ -29,14 +29,14 @@ public class UserRepository {
     }
 
     private void insert(List<User> users) {
-        database.userDao().insertAllDAO(users);
+        database.userDAO().insertAllDAO(users);
     }
 
     private List<User> users;
     TextView textView;
     User user;
 
-    public void getAllUsers(String cpf) {
+    public void getAllUsers(String cpf, final RequestResult requestResult) {
 
         Call<List<User>> call = new RetrofitConfig().getUserService().getAllUsers(cpf);
 
@@ -46,12 +46,13 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     users = response.body();
                     UserRepository.this.insert(users);
+                    requestResult.successResult(users);
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                textView.setText(t.getMessage());
+                requestResult.errorResult(t.getMessage());
             }
         });
     }
@@ -65,6 +66,7 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     user = response.body();
+
                 }
             }
 
@@ -115,7 +117,7 @@ public class UserRepository {
         });
     }
 
-    public User getUserProfile(final UserRequest userRequest) {
+    public User getUserProfile(final UserRequest userRequest, final RequestResult result) {
 
         Call<User> call = new RetrofitConfig().getUserService().addUser(userRequest);
 
@@ -124,14 +126,16 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                    user = response.body();
-                   database.userDao().insertUSerDAO(user);
+                   database.userDAO().insertUSerDAO(user);
+                   result.successResult(user);
+                    Log.i(">>>Login", "Sucesso");
 
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
+                result.errorResult(t.getMessage());
             }
         });
 

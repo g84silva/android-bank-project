@@ -12,7 +12,7 @@ import com.example.bankproject.Model.UserRequest;
 import java.util.List;
 
 @Dao
-public interface UserDao {
+public interface UserDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAllDAO(List<User> users);
