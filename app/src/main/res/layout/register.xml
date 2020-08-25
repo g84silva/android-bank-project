@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFF">
 
     <Toolbar
-        android:id="@+id/toolbar_page_transfer"
+        android:id="@+id/toolbar_page_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <EditText
-        android:id="@+id/agency_page_transfer"
+        android:id="@+id/name_page_register"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Agência"
+        android:hint="Name"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_page_register" />
     <EditText
-        android:id="@+id/account_destiny_page_transfer"
+        android:id="@+id/cpf_page_register"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Conta destino"
+        android:hint="CPF"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/agency_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@+id/name_page_register" />
     <EditText
-        android:id="@+id/value_page_transfer"
+        android:id="@+id/phone_page_register"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Valor"
+        android:hint="Telefone"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_destiny_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@+id/cpf_page_register" />
+    <EditText
+        android:id="@+id/password_page_register"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Senha"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_page_register" />
     <Button
-        android:id="@+id/button_page_transfer"
+        android:id="@+id/button_page_register"
         android:layout_width="340dp"
         android:layout_height="60dp"
         android:background="@drawable/radius_button"
-        android:text="TRANSFERIR"
+        android:text="CADASTRAR"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="#FFF"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/value_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@+id/password_page_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

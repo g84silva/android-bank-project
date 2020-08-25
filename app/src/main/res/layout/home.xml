@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <android.support.v7.widget.CardView
+   <androidx.cardview.widget.CardView
        android:id="@+id/card_home"
        android:layout_width="match_parent"
-       android:layout_height="180dp"
-       android:background="#e18100"
+       android:layout_height="150dp"
+       app:cardBackgroundColor="#e18100"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent">
 
        <TextView
-           android:id="@+id/blabla"
+           android:id="@+id/username_home"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Boas vindas, Paulo!"
@@ -22,15 +22,15 @@
            android:textSize="20dp"
            android:textStyle="bold"
            android:layout_gravity="center"/>
-       <android.support.v7.widget.AppCompatImageView
+       <androidx.appcompat.widget.AppCompatImageView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_gravity="center_horizontal|bottom"
-           android:paddingBottom="40dp"
+           android:paddingBottom="20dp"
            android:src="@drawable/ic_arrow_down"/>
-   </android.support.v7.widget.CardView>
+   </androidx.cardview.widget.CardView>
 
-<android.support.v7.widget.CardView
+<androidx.cardview.widget.CardView
     android:id="@+id/card_account_information"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -77,47 +77,45 @@
         android:textSize="19dp">
     </TextView>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button_payment"
+        android:id="@+id/button_payment_home"
         android:layout_width="340dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:text="PAGAR"
         android:textStyle="bold"
-        android:textColor="#FFF"
         android:textSize="20dp"
+        android:textColor="#FFF"
         android:background="@drawable/radius_button"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_account_information" />
-
     <Button
-        android:id="@+id/button_transfer"
+        android:id="@+id/button_transfer_home"
         android:layout_width="340dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:text="TRANSFERIR"
         android:textStyle="bold"
-        android:textColor="#FFF"
         android:textSize="20dp"
+        android:textColor="#FFF"
         android:background="@drawable/radius_button"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_payment" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_payment_home" />
     <Button
-        android:id="@+id/button_recharge"
+        android:id="@+id/button_recharge_home"
         android:layout_width="340dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:text="RECARREGAR"
         android:textStyle="bold"
-        android:textColor="#FFF"
         android:textSize="20dp"
+        android:textColor="#FFF"
         android:background="@drawable/radius_button"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_transfer"/>
-</android.support.constraint.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_transfer_home"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
