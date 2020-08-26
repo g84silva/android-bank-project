@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF" >
@@ -14,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <EditText
+    <TextView
         android:id="@+id/agency_page_transfer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -22,7 +21,7 @@
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_page_transfer" />
     <EditText
         android:id="@+id/account_destiny_page_transfer"
         android:layout_width="300dp"
@@ -31,7 +30,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/agency_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/agency_page_transfer" />
     <EditText
         android:id="@+id/value_page_transfer"
         android:layout_width="300dp"
@@ -40,7 +39,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_destiny_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/account_destiny_page_transfer" />
     <Button
         android:id="@+id/button_page_transfer"
         android:layout_width="340dp"
@@ -53,6 +52,7 @@
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/value_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/value_page_transfer"
+        android:onClick="transfer"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

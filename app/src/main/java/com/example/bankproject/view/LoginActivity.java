@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,10 +18,11 @@ import com.example.bankproject.service.RequestResult;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static String USER_LOGIN = "userLogin";
+  public static final String USER_LOGIN = "userLogin";
 
   private EditText cpf;
   private EditText pws;
+  private TextView register;
   private UserRepository userRepository = UserRepository.getInstance();
 
   @Override
@@ -28,9 +30,10 @@ public class LoginActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.login);
 
-    cpf = findViewById(R.id.cpf_login);
-    pws = findViewById(R.id.password_login);
-    Button loginButton = findViewById(R.id.button_login);
+    cpf = findViewById(R.id.cpf_page_login);
+    pws = findViewById(R.id.password_page_login);
+    register = findViewById(R.id.register_page_login);
+    Button loginButton = findViewById(R.id.button_page_login);
 
     loginButton.setOnClickListener(
         new View.OnClickListener() {
@@ -58,5 +61,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
           }
         });
+
+    register.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
+    });
   }
 }

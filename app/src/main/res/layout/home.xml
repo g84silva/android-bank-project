@@ -23,6 +23,7 @@
            android:textStyle="bold"
            android:layout_gravity="center"/>
        <androidx.appcompat.widget.AppCompatImageView
+           android:id="@+id/arrow_to_profile"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_gravity="center_horizontal|bottom"
@@ -69,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/available_balance"
         android:layout_alignParentEnd="true"
-        app:layout_constraintStart_toEndOf="@+id/value_available"
+        app:layout_constraintStart_toEndOf="@id/value_available"
         android:text="Ativo"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
@@ -91,7 +92,7 @@
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_account_information" />
+        app:layout_constraintTop_toBottomOf="@id/card_account_information" />
     <Button
         android:id="@+id/button_transfer_home"
         android:layout_width="340dp"
@@ -104,7 +105,7 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_payment_home" />
+        app:layout_constraintTop_toBottomOf="@id/button_payment_home" />
     <Button
         android:id="@+id/button_recharge_home"
         android:layout_width="340dp"
@@ -117,5 +118,5 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_transfer_home"/>
+        app:layout_constraintTop_toBottomOf="@id/button_transfer_home"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

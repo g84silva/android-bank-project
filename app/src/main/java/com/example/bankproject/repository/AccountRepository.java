@@ -1,7 +1,6 @@
 package com.example.bankproject.repository;
 
 import com.example.bankproject.dto.request.AccountRequest;
-import com.example.bankproject.dto.response.AccountResponse;
 import com.example.bankproject.model.Account;
 import com.example.bankproject.service.RequestResult;
 import com.example.bankproject.service.RetrofitConfig;
@@ -28,8 +27,29 @@ public class AccountRepository {
   public void addAccount(
       String cpf, String pws, AccountRequest accountRequest, final RequestResult result) {
 
-    Call<Account> call =
+    Call<Void> call =
         new RetrofitConfig().getBankAccountService().addAccount(cpf, pws, accountRequest);
+
+    call.enqueue(
+        new Callback<Void>() {
+          @Override
+          public void onResponse(Call<Void> call, Response<Void> response) {
+            if (response.isSuccessful()) {
+              result.successResult(response.body());
+            }
+          }
+
+          @Override
+          public void onFailure(Call<Void> call, Throwable t) {
+            result.errorResult(t.getMessage());
+          }
+        });
+  }
+
+  public void getAccountsByUser(String cpf, String pws, final RequestResult result) {
+
+    Call<Account> call =
+        new RetrofitConfig().getBankAccountService().getAccountsByUser(cpf, pws);
 
     call.enqueue(
         new Callback<Account>() {
@@ -47,44 +67,23 @@ public class AccountRepository {
         });
   }
 
-  public void getAccountsByUser(String cpf, String pws, final RequestResult result) {
-
-    Call<AccountResponse> call =
-        new RetrofitConfig().getBankAccountService().getAccountsByUser(cpf, pws);
-
-    call.enqueue(
-        new Callback<AccountResponse>() {
-          @Override
-          public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
-            if (response.isSuccessful()) {
-              result.successResult(response.body());
-            }
-          }
-
-          @Override
-          public void onFailure(Call<AccountResponse> call, Throwable t) {
-            result.errorResult(t.getMessage());
-          }
-        });
-  }
-
   public void getAllAccounts(String cpf, String pws, final RequestResult result) {
 
-    Call<List<AccountResponse>> call =
+    Call<List<Account>> call =
         new RetrofitConfig().getBankAccountService().getAllAccounts(cpf, pws);
 
     call.enqueue(
-        new Callback<List<AccountResponse>>() {
+        new Callback<List<Account>>() {
           @Override
           public void onResponse(
-              Call<List<AccountResponse>> call, Response<List<AccountResponse>> response) {
+              Call<List<Account>> call, Response<List<Account>> response) {
             if (response.isSuccessful()) {
               result.successResult(response.body());
             }
           }
 
           @Override
-          public void onFailure(Call<List<AccountResponse>> call, Throwable t) {
+          public void onFailure(Call<List<Account>> call, Throwable t) {
             result.errorResult(t.getMessage());
           }
         });

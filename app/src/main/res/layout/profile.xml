@@ -41,7 +41,7 @@
                 android:layout_below="@id/card_image_profile"/>
 
             <TextView
-                android:id="@+id/branch_bank"
+                android:id="@+id/branch_bank_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Agência: 001"
@@ -59,7 +59,7 @@
                 android:textColor="#000"
                 android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_below="@id/branch_bank"/>
+                android:layout_below="@id/branch_bank_profile"/>
 
             <TextView
                 android:id="@+id/account_stauts_profile"
@@ -98,7 +98,7 @@
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:paddingTop="30dp"
-                android:layout_below="@+id/button_profile"/>
+                android:layout_below="@id/button_profile"/>
 
     </RelativeLayout>
 

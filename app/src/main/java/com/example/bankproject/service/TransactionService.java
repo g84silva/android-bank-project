@@ -1,5 +1,6 @@
 package com.example.bankproject.service;
 
+import com.example.bankproject.dto.request.DepositRequest;
 import com.example.bankproject.dto.request.PaymentRequest;
 import com.example.bankproject.dto.request.TransferRequest;
 import com.example.bankproject.dto.response.AccountExtractResponse;
@@ -31,7 +32,7 @@ public interface TransactionService {
       @Header("account") String account,
       @Header("cpf") String cpf,
       @Header("pws") String pws,
-      @Body String amount);
+      @Body DepositRequest depositRequest);
 
   @GET("transaction/getByUser")
   Call<List<AccountExtractResponse>> accountExtract(

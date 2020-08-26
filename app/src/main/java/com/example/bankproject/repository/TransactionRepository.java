@@ -1,5 +1,6 @@
 package com.example.bankproject.repository;
 
+import com.example.bankproject.dto.request.DepositRequest;
 import com.example.bankproject.dto.request.PaymentRequest;
 import com.example.bankproject.dto.request.TransferRequest;
 import com.example.bankproject.dto.response.AccountExtractResponse;
@@ -18,6 +19,17 @@ import retrofit2.Response;
 
 public class TransactionRepository {
 
+  private static TransactionRepository transactionRepository;
+
+  private TransactionRepository() {}
+
+  public static TransactionRepository getInstance() {
+    if (transactionRepository == null) {
+      transactionRepository = new TransactionRepository();
+    }
+    return transactionRepository;
+  }
+
   public void payment(
       String account,
       String cpf,
@@ -32,7 +44,7 @@ public class TransactionRepository {
           @Override
           public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
             if (response.isSuccessful()) {
-              result.successResult(response.body().getMessage());
+              result.successResult(response.body().getMensagem());
             } else {
               result.errorResult(response.errorBody().string());
             }
@@ -53,13 +65,12 @@ public class TransactionRepository {
         new Callback<Void>() {
           @Override
           public void onResponse(Call<Void> call, Response<Void> response) {
-            String mensagem = null;
             if (response.isSuccessful()) {
               result.successResult("Transferência realizada com sucesso!");
             } else if (response.errorBody() != null) {
               try {
-                mensagem = response.errorBody().string();
-                result.errorResult(mensagem = new ObjectMapper().readValue(mensagem, String.class));
+                result.errorResult(
+                    new ObjectMapper().readValue(response.errorBody().string(), String.class));
               } catch (IOException e) {
                 e.printStackTrace();
               }
@@ -74,22 +85,19 @@ public class TransactionRepository {
   }
 
   public void deposit(
-      String account, String cpf, String pws, String amount, final RequestResult result) {
+          String account, String cpf, String pws, DepositRequest depositRequest, final RequestResult result) {
     Call<Void> call =
-        new RetrofitConfig().getTransactionService().deposit(account, cpf, pws, amount);
+        new RetrofitConfig().getTransactionService().deposit(account, cpf, pws, depositRequest);
     call.enqueue(
         new Callback<Void>() {
           @Override
           public void onResponse(Call<Void> call, Response<Void> response) {
-            String mensagem = "";
             if (response.isSuccessful()) {
-              result.successResult(mensagem = "Depósito realizado com sucesso!");
+              result.successResult("Depósito realizado com sucesso!");
             } else {
               if (response.errorBody() != null) {
                 try {
-                  mensagem = response.errorBody().string();
-                  result.errorResult(
-                      mensagem = new ObjectMapper().readValue(mensagem, String.class));
+                  result.errorResult(response.errorBody().string());
                 } catch (IOException e) {
                   e.printStackTrace();
                 }

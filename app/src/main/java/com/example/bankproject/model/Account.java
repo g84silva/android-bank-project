@@ -2,16 +2,22 @@ package com.example.bankproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @JsonIgnoreProperties({"createdAt", "updatedAt", "__v"})
-public class Account {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Account implements Serializable {
 
   private String _id;
   private String bank_branch;
   private String code;
-  private int account_balance;
+  private String user;
+  private Double account_balance;
   private int status;
-  private String cpf;
 }
