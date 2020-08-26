@@ -12,20 +12,29 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="CPF"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:inputType="number"
         android:layout_marginTop="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" 
+    />
+    
     <EditText
         android:id="@+id/password_page_login"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Senha"
+        android:maxLines="1"
+        android:maxLength="10"
         android:inputType="textPassword"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cpf_page_login" />
+        app:layout_constraintTop_toBottomOf="@id/cpf_page_login" 
+    />
+    
     <Button
         android:id="@+id/button_page_login"
         android:layout_width="340dp"
@@ -38,7 +47,9 @@
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_page_login" />
+        app:layout_constraintTop_toBottomOf="@id/password_page_login" 
+    />
+    
     <TextView
         android:id="@+id/register_page_login"
         android:layout_width="wrap_content"
@@ -49,6 +60,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_page_login" />
-
+        app:layout_constraintTop_toBottomOf="@id/button_page_login" 
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
