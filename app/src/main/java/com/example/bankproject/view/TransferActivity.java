@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.bankproject.R;
 import com.example.bankproject.dto.request.TransferRequest;
@@ -24,6 +25,13 @@ public class TransferActivity extends AppCompatActivity {
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.transfer);
+    
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setTitle("Transferência");
+
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     TextView bankBranch = findViewById(R.id.agency_page_transfer);
     bankBranch.setText(sharedPreferences.getString("code", ""));

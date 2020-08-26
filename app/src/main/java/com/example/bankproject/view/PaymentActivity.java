@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.bankproject.R;
 import com.example.bankproject.dto.request.PaymentRequest;
@@ -27,6 +28,13 @@ public class PaymentActivity extends AppCompatActivity {
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.payment);
+    
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setTitle("Pagamentos");
+
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     billetNumber = findViewById(R.id.number_billet_page_payment);
     billetValue = findViewById(R.id.value_page_payment);

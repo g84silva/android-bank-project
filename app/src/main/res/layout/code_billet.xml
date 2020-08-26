@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Toolbar
-        android:id="@+id/toolbar_page_code_billet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+    />
+
     <TextView
         android:id="@+id/code_billet"
         android:layout_width="300dp"
@@ -23,7 +21,9 @@
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_page_code_billet" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" 
+    />
+
     <Button
         android:id="@+id/button_page_code_billet"
         android:layout_width="340dp"
@@ -36,6 +36,6 @@
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/code_billet" />
-
+        app:layout_constraintTop_toBottomOf="@id/code_billet" 
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

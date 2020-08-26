@@ -4,42 +4,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF" >
+    android:background="#FFF">
 
-    <Toolbar
-        android:id="@+id/toolbar_page_transfer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+    />
+
+    <EditText
         android:id="@+id/agency_page_transfer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Agência"
+        android:maxLines="1"
+        android:maxLength="10"
+        android:inputType="number"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+    />
+
     <EditText
         android:id="@+id/account_destiny_page_transfer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Conta destino"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:inputType="number"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/agency_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/agency_page_transfer"
+    />
+
     <EditText
         android:id="@+id/value_page_transfer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Valor"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:inputType="numberDecimal"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/account_destiny_page_transfer" />
+        app:layout_constraintTop_toBottomOf="@id/account_destiny_page_transfer"
+    />
+
     <Button
         android:id="@+id/button_page_transfer"
         android:layout_width="340dp"
@@ -53,6 +66,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/value_page_transfer"
-        android:onClick="transfer"/>
-
+        android:onClick="transfer"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

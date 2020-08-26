@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
     sharedPreferences = getSharedPreferences("shared", Context.MODE_PRIVATE);
 
-    value = findViewById(R.id.value_available);
+    value = findViewById(R.id.available_value);
     name = findViewById(R.id.username_home);
     status = findViewById(R.id.account_status);
 

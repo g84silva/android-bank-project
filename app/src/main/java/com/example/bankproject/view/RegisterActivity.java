@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.bankproject.R;
 import com.example.bankproject.dto.request.AccountRequest;
@@ -29,6 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.register);
+    
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setTitle("Cadastrar");
+
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     name = findViewById(R.id.name_page_register);
     cpf = findViewById(R.id.cpf_page_register);
