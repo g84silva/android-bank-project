@@ -50,7 +50,6 @@
                 android:layout_marginTop="170dp"
                 android:layout_marginEnd="70dp"
                 android:inputType="textPersonName"
-                android:src="@drawable/ic_camera" 
             />
 
             <TextView
