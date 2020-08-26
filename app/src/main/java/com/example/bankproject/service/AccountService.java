@@ -1,6 +1,7 @@
 package com.example.bankproject.service;
 
 import com.example.bankproject.dto.request.AccountRequest;
+import com.example.bankproject.dto.request.UpdateAccountRequest;
 import com.example.bankproject.model.Account;
 
 import java.util.List;
@@ -25,6 +26,6 @@ public interface AccountService {
   Call<List<Account>> getAllAccounts(@Header("cpf") String cpf, @Header("pws") String pws);
 
   @PUT("accounts")
-  Call<String> updateAccount(
-      @Header("cpf") String cpf, @Header("pws") String pws, @Body int status);
+  Call<Void> updateAccount(
+      @Header("cpf") String cpf, @Header("pws") String pws, @Body UpdateAccountRequest updateAccountRequest);
 }

@@ -35,7 +35,7 @@ public class RechargeActivity extends AppCompatActivity {
         sharedPreferences.getString("code", ""),
         sharedPreferences.getString("cpf", ""),
         sharedPreferences.getString("pws", ""),
-        new DepositRequest(value.getText().toString()),
+        new DepositRequest(Double.valueOf(value.getText().toString())),
         new RequestResult() {
           @Override
           public <T> void successResult(T object) {

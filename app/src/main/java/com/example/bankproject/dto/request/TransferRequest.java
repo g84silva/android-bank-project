@@ -9,5 +9,5 @@ public class TransferRequest {
 
   private String origem;
   private String destino;
-  private String amount;
+  private double amount;
 }

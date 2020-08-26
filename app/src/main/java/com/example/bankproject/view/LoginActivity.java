@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.putExtra(USER_LOGIN, (User) object);
                     startActivity(intent);
+                    finish();
                   }
 
                   @Override

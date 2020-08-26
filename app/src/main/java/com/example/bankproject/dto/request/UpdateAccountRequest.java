@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class DepositRequest {
-    private double amount;
+public class UpdateAccountRequest {
+  private int status;
 }

@@ -1,12 +1,14 @@
 package com.example.bankproject.repository;
 
 import com.example.bankproject.dto.request.AccountRequest;
+import com.example.bankproject.dto.request.UpdateAccountRequest;
 import com.example.bankproject.model.Account;
 import com.example.bankproject.service.RequestResult;
 import com.example.bankproject.service.RetrofitConfig;
 
 import java.util.List;
 
+import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,22 +91,25 @@ public class AccountRepository {
         });
   }
 
-  public void updateAccount(String cpf, String pws, int status, final RequestResult result) {
+  public void updateAccount(String cpf, String pws, UpdateAccountRequest updateAccountRequest, final RequestResult result) {
 
-    Call<String> call =
-        new RetrofitConfig().getBankAccountService().updateAccount(cpf, pws, status);
+    Call<Void> call =
+        new RetrofitConfig().getBankAccountService().updateAccount(cpf, pws, updateAccountRequest);
 
     call.enqueue(
-        new Callback<String>() {
+        new Callback<Void>() {
+          @SneakyThrows
           @Override
-          public void onResponse(Call<String> call, Response<String> response) {
+          public void onResponse(Call<Void> call, Response<Void> response) {
             if (response.isSuccessful()) {
               result.successResult(response.body());
+            } else {
+                result.errorResult(response.errorBody().string());
             }
           }
 
           @Override
-          public void onFailure(Call<String> call, Throwable t) {
+          public void onFailure(Call<Void> call, Throwable t) {
             result.errorResult(t.getMessage());
           }
         });

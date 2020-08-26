@@ -86,7 +86,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_below="@id/account_stauts_profile"/>
+                android:layout_below="@id/account_stauts_profile"
+                android:onClick="closeAccount"/>
 
             <TextView
                 android:id="@+id/exit_profile"
@@ -98,7 +99,8 @@
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:paddingTop="30dp"
-                android:layout_below="@id/button_profile"/>
+                android:layout_below="@id/button_profile"
+                android:onClick="logout"/>
 
     </RelativeLayout>
 

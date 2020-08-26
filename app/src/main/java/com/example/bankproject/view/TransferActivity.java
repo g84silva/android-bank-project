@@ -40,7 +40,7 @@ public class TransferActivity extends AppCompatActivity {
         new TransferRequest(
             sharedPreferences.getString("code", ""),
             targetAccount.getText().toString(),
-            value.getText().toString()),
+            Double.parseDouble(value.getText().toString())),
         new RequestResult() {
           @Override
           public <T> void successResult(T object) {
