@@ -1,84 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:background="#FFF">
 
-   <androidx.cardview.widget.CardView
-       android:id="@+id/card_home"
-       android:layout_width="match_parent"
-       android:layout_height="150dp"
-       app:cardBackgroundColor="#e18100"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent">
+	<androidx.cardview.widget.CardView
+        android:id="@+id/card_home"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#e18100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-       <TextView
-           android:id="@+id/username_home"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Boas vindas, Paulo!"
-           android:textColor="#fff"
-           android:textSize="20dp"
-           android:textStyle="bold"
-           android:layout_gravity="center"/>
-       <androidx.appcompat.widget.AppCompatImageView
-           android:id="@+id/arrow_to_profile"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_horizontal|bottom"
-           android:paddingBottom="20dp"
-           android:src="@drawable/ic_arrow_down"/>
-   </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/username_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boas vindas, Paulo!"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_gravity="center"
+        />
 
-<androidx.cardview.widget.CardView
-    android:id="@+id/card_account_information"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@id/card_home">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/available_balance"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/arrow_to_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:paddingBottom="20dp"
+            android:src="@drawable/ic_arrow_down"
+    	/>
+	</androidx.cardview.widget.CardView>
+
+	<androidx.cardview.widget.CardView
+  		android:id="@+id/card_account_information"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:text="Saldo disponível"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:textColor="#252525"
-        android:textSize="19dp">
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_home">
 
-    <TextView
-        android:id="@+id/value_available"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/available_balance"
-        android:layout_alignParentStart="true"
-        android:text="R$ 0,00"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#252525"
-        android:textSize="19dp">
-    </TextView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/account_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/available_balance"
-        android:layout_alignParentEnd="true"
-        app:layout_constraintStart_toEndOf="@id/value_available"
-        android:text="Ativo"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#252525"
-        android:textSize="19dp">
-    </TextView>
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/available_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Saldo disponível"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:textColor="#252525"
+                android:textSize="20dp"
+            />
+
+            <TextView
+                android:id="@+id/available_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/available_balance"
+                android:layout_alignParentStart="true"
+                android:text="R$ 0,00"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#252525"
+                android:textSize="20dp"
+            />
+
+            <TextView
+                android:id="@+id/account_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/available_balance"
+                android:layout_alignParentEnd="true"
+                app:layout_constraintStart_toEndOf="@id/available_value"
+                android:text="Ativo"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#252525"
+                android:textSize="20dp"
+            />
+        </RelativeLayout>
+	</androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button_payment_home"
@@ -92,7 +101,9 @@
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_account_information" />
+        app:layout_constraintTop_toBottomOf="@id/card_account_information" 
+    />
+
     <Button
         android:id="@+id/button_transfer_home"
         android:layout_width="340dp"
@@ -105,7 +116,9 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_payment_home" />
+        app:layout_constraintTop_toBottomOf="@id/button_payment_home" 
+    />
+
     <Button
         android:id="@+id/button_recharge_home"
         android:layout_width="340dp"
@@ -118,5 +131,6 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_transfer_home"/>
+        app:layout_constraintTop_toBottomOf="@id/button_transfer_home"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
