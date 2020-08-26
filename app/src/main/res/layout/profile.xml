@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#E18100" >
+    android:background="#E18100">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_image_profile"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="90dp"
-            android:layout_marginRight="90dp"
-            app:cardCornerRadius="40dp" >
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+        />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_image_profile"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="90dp"
+                app:cardCornerRadius="100dp" >
+
+                <ImageView
+                    android:id="@+id/image_profile"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                />
+            </androidx.cardview.widget.CardView>
 
             <ImageView
-                android:id="@+id/image_profile"
-                android:layout_width="200dp"
-                android:layout_height="200dp" />
-        </androidx.cardview.widget.CardView>
+                android:id="@+id/img_user_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="170dp"
+                android:layout_marginEnd="70dp"
+                android:inputType="textPersonName"
+                android:src="@drawable/ic_camera" 
+            />
 
             <TextView
                 android:id="@+id/username_profile"
@@ -37,8 +62,10 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                android:paddingTop="40dp"
-                android:layout_below="@id/card_image_profile"/>
+                android:layout_marginTop="40dp"
+                android:layout_below="@+id/card_image_profile"
+            />
+
 
             <TextView
                 android:id="@+id/branch_bank_profile"
@@ -49,8 +76,9 @@
                 android:textSize="20dp"
                 android:layout_marginStart="20dp"
                 android:paddingTop="10dp"
-                android:layout_below="@id/username_profile"/>
-
+                android:layout_below="@+id/username_profile"
+            />
+            
             <TextView
                 android:id="@+id/account_number_profile"
                 android:layout_width="wrap_content"
@@ -59,8 +87,9 @@
                 android:textColor="#000"
                 android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_below="@id/branch_bank_profile"/>
-
+                android:layout_below="@+id/branch_bank_profile"
+            />
+            
             <TextView
                 android:id="@+id/account_stauts_profile"
                 android:layout_width="wrap_content"
@@ -70,24 +99,23 @@
                 android:textColor="#000"
                 android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_below="@id/account_number_profile"/>
-
+                android:layout_below="@+id/account_number_profile"
+            />
+            
             <Button
                 android:id="@+id/button_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="ENCERRAR CONTA"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:text="CANCELAR CONTA"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="20dp"
                 android:background="@drawable/radius_button_profile"
-                android:layout_marginTop="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
                 android:layout_below="@id/account_stauts_profile"
-                android:onClick="closeAccount"/>
+                android:onClick="closeAccount"
+            />
 
             <TextView
                 android:id="@+id/exit_profile"
@@ -99,9 +127,9 @@
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:paddingTop="30dp"
-                android:layout_below="@id/button_profile"
-                android:onClick="logout"/>
-
-    </RelativeLayout>
-
-</LinearLayout>
+                android:layout_below="@+id/button_profile"
+                android:onClick="logout"
+            />
+        </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
