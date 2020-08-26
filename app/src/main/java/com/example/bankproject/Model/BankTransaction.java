@@ -2,25 +2,26 @@ package com.example.bankproject.Model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
 @Entity(tableName = "TransBancaria")
 public class BankTransaction implements Serializable {
-
-    @PrimaryKey(autoGenerate = true) private String btid;
+    @PrimaryKey(autoGenerate = true) private int btid;
     @ColumnInfo(name = "bTransServer_id")
     private String _id;
     private int source_transaction;
+    @Ignore
     private BankAccount bank_account;
     private int amount;
 
-    public String getBtid() {
+    public int getBtid() {
         return btid;
     }
 
-    public void setBtid(String btid) {
+    public void setBtid(int btid) {
         this.btid = btid;
     }
 

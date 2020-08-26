@@ -22,8 +22,8 @@ public interface BTransDAO {
     @Query("SELECT * FROM TransBancaria")
     List<BankTransaction> getAllBTransDAO();
 
-    @Query("SELECT * FROM ContaBancaria WHERE bTransServer_id LIKE :bTransServer_id")
-    BankTransaction getBTransDAO(String bTransServer_id);
+//    @Query("SELECT * FROM ContaBancaria WHERE bTransServer_id LIKE :bTransServer_id")
+//    BankTransaction getBTransDAO(String bTransServer_id);
 
     @Update
     void updateAccDAO(BankTransaction bankTransaction);

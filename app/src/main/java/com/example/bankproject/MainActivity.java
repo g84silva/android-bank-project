@@ -1,11 +1,23 @@
 package com.example.bankproject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.ToolbarWidgetWrapper;
 
+import android.Manifest;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +29,9 @@ import com.example.bankproject.Model.UserRequest;
 import com.example.bankproject.Repository.UserRepository;
 import com.example.bankproject.Services.RequestResult;
 import com.example.bankproject.Services.RetrofitConfig;
+import com.example.bankproject.View.ProfileActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,29 +41,42 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     private UserRepository uRepo = null;
     private List<User> users;
-    //    UserRequest userRequest;
+        UserRequest userRequest;
     User user;
     private EditText mNome, mCpf, mTelefone, mPws;
+
     private TextView mResult;
     private Button mBtn;
+
+    Uri image_uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Cadastro");
+
         mNome = findViewById(R.id.edt_login_name);
         mCpf = findViewById(R.id.edt_login_cpf);
         mTelefone = findViewById(R.id.edt_login_telefone);
         mPws = findViewById(R.id.edt_login_pws);
+
         mResult = findViewById(R.id.all_users);
+
         mBtn = findViewById(R.id.btn_request);
 
         uRepo = new UserRepository(this);
 
         users = new ArrayList<>();
+
+
 
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +99,16 @@ public class MainActivity extends AppCompatActivity {
 //        getAccountsByUser();
 //        getAllAccounts();
 //        updateAccounts();
+//        sendProfileActivity();
 
     }
+
+//    private void sendProfileActivity() {
+//        Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
+//
+//    }
+
+
 
     public void login(UserRequest userRequest) {
         RequestResult result = new RequestResult() {
