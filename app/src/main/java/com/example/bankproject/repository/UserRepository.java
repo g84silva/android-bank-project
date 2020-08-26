@@ -56,7 +56,7 @@ public class UserRepository {
             if (response.isSuccessful()) {
               result.successResult(response.body());
             } else {
-              result.errorResult(response.errorBody().string());
+              result.errorResult(response.errorBody().toString());
             }
           }
 

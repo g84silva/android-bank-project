@@ -4,7 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+
 public class UpdateAccountRequest {
   private int status;
+
+  public UpdateAccountRequest() {
+  }
+
+  public UpdateAccountRequest(int status) {
+    this.status = status;
+  }
 }

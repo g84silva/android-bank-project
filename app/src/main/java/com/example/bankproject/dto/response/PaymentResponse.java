@@ -14,4 +14,20 @@ import lombok.NoArgsConstructor;
 public class PaymentResponse {
   private String mensagem;
   private Account account;
+
+  public String getMensagem() {
+    return mensagem;
+  }
+
+  public void setMensagem(String mensagem) {
+    this.mensagem = mensagem;
+  }
+
+  public Account getAccount() {
+    return account;
+  }
+
+  public void setAccount(Account account) {
+    this.account = account;
+  }
 }

@@ -11,22 +11,32 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bankproject.R;
+import com.example.bankproject.adapter.TransactionAdapter;
 import com.example.bankproject.model.Account;
+import com.example.bankproject.model.Transaction;
 import com.example.bankproject.model.User;
 import com.example.bankproject.repository.AccountRepository;
+import com.example.bankproject.repository.TransactionRepository;
 import com.example.bankproject.service.RequestResult;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
   public static final String USER_ACCOUNT = "userAccount";
 
+
+
   private TextView value;
   private TextView name;
   private TextView status;
+
   private AccountRepository accountRepository = AccountRepository.getInstance();
   public static SharedPreferences sharedPreferences;
 
@@ -40,10 +50,19 @@ public class HomeActivity extends AppCompatActivity {
     value = findViewById(R.id.value_available);
     name = findViewById(R.id.username_home);
     status = findViewById(R.id.account_status);
+
     ImageView profile = findViewById(R.id.arrow_to_profile);
     Button payment = findViewById(R.id.button_payment_home);
     Button transfer = findViewById(R.id.button_transfer_home);
     Button recharge = findViewById(R.id.button_recharge_home);
+
+    value.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(HomeActivity.this, ExtractActivity.class);
+            startActivity(intent);
+        }
+    });
 
     payment.setOnClickListener(
         new View.OnClickListener() {
@@ -82,7 +101,9 @@ public class HomeActivity extends AppCompatActivity {
         });
   }
 
-  @Override
+
+
+    @Override
   protected void onResume() {
     super.onResume();
     final User user =

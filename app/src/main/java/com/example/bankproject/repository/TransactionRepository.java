@@ -46,7 +46,7 @@ public class TransactionRepository {
             if (response.isSuccessful()) {
               result.successResult(response.body().getMensagem());
             } else {
-              result.errorResult(response.errorBody().string());
+              result.errorResult(response.errorBody().toString());
             }
           }
 

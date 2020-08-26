@@ -64,6 +64,7 @@
         android:textSize="19dp">
     </TextView>
 
+
     <TextView
         android:id="@+id/account_status"
         android:layout_width="wrap_content"

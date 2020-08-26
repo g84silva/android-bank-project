@@ -15,4 +15,36 @@ public class AccountExtractResponse {
   private int source_transaction;
   private double amount;
   private String createdAt;
+
+  public String[] getBank_account() {
+    return bank_account;
+  }
+
+  public void setBank_account(String[] bank_account) {
+    this.bank_account = bank_account;
+  }
+
+  public int getSource_transaction() {
+    return source_transaction;
+  }
+
+  public void setSource_transaction(int source_transaction) {
+    this.source_transaction = source_transaction;
+  }
+
+  public double getAmount() {
+    return amount;
+  }
+
+  public void setAmount(double amount) {
+    this.amount = amount;
+  }
+
+  public String getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
 }

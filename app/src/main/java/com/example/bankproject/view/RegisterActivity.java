@@ -39,9 +39,9 @@ public class RegisterActivity extends AppCompatActivity {
   public void register(View view) {
     userRepository.addUser(
         new UserRequest(
-            cpf.getText().toString(),
             name.getText().toString(),
-            "",
+            cpf.getText().toString(),
+           "",
             phone.getText().toString(),
             pws.getText().toString()),
         new RequestResult() {
