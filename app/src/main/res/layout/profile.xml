@@ -36,6 +36,7 @@
                 <ImageView
                     android:id="@+id/image_profile"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/image_michael_b_jordan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                 />
@@ -45,6 +46,7 @@
                 android:id="@+id/img_user_avatar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="170dp"
